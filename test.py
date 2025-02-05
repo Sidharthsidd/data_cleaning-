@@ -54,7 +54,7 @@ def process_new_data():
                 print(f"Cleaned data inserted: {cleaned_data}")
 
 # Execute the trigger-based processing
-if __name__ == '__main__':
-    test.run(host='0.0.0.0', port=10000)  # Explicitly specify the port
-
+if __name__ == "__main__":
+    print("Listening for changes in the 'carts' collection...")
+    process_new_data()
 
