@@ -1,6 +1,10 @@
+import os
 import pymongo
+from flask import Flask
 
-# MongoDB Atlas connection credentials
+app = Flask(__name__)
+
+# MongoDB Atlas connection credentials from environment variables
 DB_USER = "sidharthee1905"
 DB_PASSWORD = "foodappserver"
 DB_NAME = "test"
@@ -32,12 +36,6 @@ def clean_data(data):
     
     return cleaned
 
-# def clean_existing_data():
-#     for document in cart_collection.find():
-#         cleaned_data = clean_data(document)
-#         cleaned_cart_collection.insert_one(cleaned_data)
-#         print(f"Existing cleaned data inserted: {cleaned_data}")
-
 # Function to process new data and insert cleaned data
 def process_new_data():
     # Use MongoDB Change Stream to listen to changes in the 'carts' collection
@@ -53,9 +51,11 @@ def process_new_data():
                 cleaned_cart_collection.insert_one(cleaned_data)
                 print(f"Cleaned data inserted: {cleaned_data}")
 
-# Execute the trigger-based processing
+@app.route('/')
+def home():
+    return "Listening for changes in the 'carts' collection..."
+
 if __name__ == "__main__":
     print("Listening for changes in the 'carts' collection...")
     process_new_data()
-    app.run(host="0.0.0.0", port=10000)  
-
+    app.run(host="0.0.0.0", port=10000)
