@@ -57,4 +57,5 @@ def process_new_data():
 if __name__ == "__main__":
     print("Listening for changes in the 'carts' collection...")
     process_new_data()
+    app.run(host="0.0.0.0", port=10000)  
 
