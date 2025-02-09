@@ -40,6 +40,6 @@ def process_new_data():
                 cleaned_cart_collection.insert_one(cleaned_data)
                 print(f"Cleaned data inserted: {cleaned_data}")
 
-if _name_ == "_main_":
+if __name__ == "_main_":
     print("Listening for changes in the 'carts' collection...")
     process_new_data()
